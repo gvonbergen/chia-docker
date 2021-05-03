@@ -56,7 +56,7 @@ docker run -d \
     -v /path/to/ca:/root/ca \
     -e CHIA_MODE="harvester" \
     -e CHIA_FARMER_ADDRESS="192.168.1.5" \
-    -e CHIA_FARMER_PORT="8774" \
+    -e CHIA_FARMER_PORT="8447" \
     -e CHIA_FARMER_CA="/root/ca" \
     gvonbergen/chia-docker:latest
 ```
@@ -65,12 +65,16 @@ Here it is fine when the private key is generate during every run as it is not u
 
 ## Additional Configuration Options
 
-If you need to incrase the log level (defalt is WARNING) then you can do this with the environment variable CHIA_LOGLEVEL.
+If you need to incrase the log level (defalt is WARNING) then you can do this with the environment variable **CHIA_LOGLEVEL**.
 
 Options are: CRITICAL|ERROR|WARNING|INFO|DEBUG|NOTSET
 
 Within the container the logfile is situated under the configuration folder:
 /config/mainnet/log/debug.log
+
+If you want to add multiple plot directories you can do this with **CHIA_PLOTS** and seperate all directories with a ",". Be aware that the directories need also to be mounted with "-v /localpath/to/1:/mnt/1 -v /localpath/to/2:/mnt/2 -v /localpath/to/3:/mnt/3"
+
+Example is '-e CHIA_PLOTS="/mnt/1,/mnt/2,/mnt/3"
 
 ## Manual Checks
 
