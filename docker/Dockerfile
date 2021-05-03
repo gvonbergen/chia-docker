@@ -5,7 +5,8 @@ FROM stage as builder
 RUN mkdir /install
 WORKDIR /install
 
-RUN pip install --prefix=/install --no-warn-script-location chia-blockchain
+ARG VERSION
+RUN pip install --prefix=/install --no-warn-script-location chia-blockchain==$VERSION
 
 FROM stage
 
@@ -21,7 +22,7 @@ ENV CHIA_FARMER_CA=""
 ENV CHIA_LOGLEVEL="WARNING"
 
 COPY --from=builder /install /usr/local
-COPY ./docker-entrypoint.sh /
+COPY ./docker/docker-entrypoint.sh /
 
 RUN mkdir /config && \
     mkdir /plots && \

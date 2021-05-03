@@ -23,7 +23,7 @@ sed -i 's/localhost/127.0.0.1/g' ~/.chia/mainnet/config/config.yaml
 # Generate or recover the chia keys
 if [[ ${CHIA_KEYS} == "generate" ]]; then
   chia keys generate
-elif [[ ${CHIA_KEYS} == "file" ]]; then
+elif [[ ${CHIA_KEYS} == "keyring" ]]; then
     echo "Mount your Python keyring: -v ~/.local/share/python_keyring/:/root/.local/share/python_keyring/"
 else
   chia keys add -f ${CHIA_KEYS}
@@ -35,7 +35,10 @@ if [[ ! "$(ls -A /plots)" ]]; then
   echo "Plots directory appears to be empty and you have not specified another, try mounting a plot directory with the docker -v command "
 fi
 
-chia plots add -d ${CHIA_PLOTS}
+for i in $(echo ${CHIA_PLOTS} | sed "s/,/ /g")
+do
+    chia plots add -d $i
+done
 
 # Set log level
 if [[ ${CHIA_LOGLEVEL} != "WARNING" ]]; then
