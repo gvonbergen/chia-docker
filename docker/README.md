@@ -10,6 +10,7 @@ Easiest set-up is to write your 24 word seed phrase into a file and give access 
 ```bash
 docker run -d \
     --name chia-farmer \
+    -p 8444:8444
     -v /path/to/plots:/plots \
     -v /path/to/keyfile:/root/keyfile \
     -e CHIA_KEYS="/root/keyfile" \
@@ -22,6 +23,7 @@ Other option is to give access within the docker container to your python keyrin
 ```bash
 docker run -d \
     --name chia-farmer \
+    -p 8444:8444
     -v /path/to/plots:/plots \
     -v /path/to/python_keyring:/root/.local/share/python_keyring/ \
     -e CHIA_KEYS="keyring" \
