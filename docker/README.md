@@ -76,7 +76,7 @@ Within the container the logfile is situated under the configuration folder:
 
 If you want to add multiple plot directories you can do this with **CHIA_PLOTS** and seperate all directories with a ",". Be aware that the directories need also to be mounted with "-v /localpath/to/1:/mnt/1 -v /localpath/to/2:/mnt/2 -v /localpath/to/3:/mnt/3"
 
-Example is '-e CHIA_PLOTS="/mnt/1,/mnt/2,/mnt/3"
+Example is -e CHIA_PLOTS="/mnt/1,/mnt/2,/mnt/3"
 
 ## Manual Checks
 

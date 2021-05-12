@@ -11,7 +11,7 @@ RUN pip install --prefix=/install --no-warn-script-location chia-blockchain==$VE
 FROM stage
 
 EXPOSE 8444
-EXPOSE 8555
+EXPOSE 8447
 
 ENV CHIA_MODE="farmer"
 ENV CHIA_KEYS="generate"
