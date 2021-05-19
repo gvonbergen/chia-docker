@@ -1,14 +1,4 @@
-FROM python:3.8 as stage
-
-FROM stage as builder
-
-RUN mkdir /install
-WORKDIR /install
-
-ARG VERSION
-RUN pip install --prefix=/install --no-warn-script-location chia-blockchain==$VERSION
-
-FROM stage
+FROM python:3.8-slim
 
 EXPOSE 8444
 EXPOSE 8447
@@ -21,7 +11,12 @@ ENV CHIA_FARMER_PORT=""
 ENV CHIA_FARMER_CA=""
 ENV CHIA_LOGLEVEL="WARNING"
 
-COPY --from=builder /install /usr/local
+RUN apt-get update && apt-get install -y \
+    git \
+    && rm -rf /var/lib/apt/lists*
+
+RUN python -m pip install --no-cache-dir git+https://github.com/Chia-Network/chia-blockchain.git
+
 COPY ./docker/docker-entrypoint.sh /
 
 RUN mkdir /config && \
